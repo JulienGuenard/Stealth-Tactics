@@ -94,7 +94,7 @@ public class SquareManager : MonoBehaviour
     {
         foreach(Square obj in Grid.instance.GetSquareList())
         {
-            ColorManager.instance.ActionColor(obj);
+            ColorManager.instance.NeutralColor(obj);
         }
 
         ColorManager.instance.HoveredColor(squareHovered);
