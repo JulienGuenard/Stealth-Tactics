@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grid : GridHeritage
 {
-    public List<GameObject> GetSquareList()
+    public List<Square> GetSquareList()
     {
         return gridEditor.squareList;
     }
