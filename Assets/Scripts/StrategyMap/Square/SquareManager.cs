@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class SquareManager : MonoBehaviour
 {
-    public Color neutralColor;
-    public Color hoveredColor;
-    public Color selectedColor;
-    public Color selectedCommandantColor;
-    public Color actionColor;
-
     private Square squareLastHovered;
     private Square squareHovered;
     private Square squareSelected;
@@ -17,8 +11,6 @@ public class SquareManager : MonoBehaviour
     private List<Square> squareActionList = new List<Square>();
 
     private GameObject commandantSelected;
-
-    public Square squareDummy;
 
     static public SquareManager instance;
 
@@ -84,7 +76,7 @@ public class SquareManager : MonoBehaviour
             }
         }
 
-        return squareDummy;
+        return null;
     }
 
     public void SetSquareHovered(Square square)
@@ -102,19 +94,19 @@ public class SquareManager : MonoBehaviour
     {
         foreach(Square obj in Grid.instance.GetSquareList())
         {
-            obj.GetComponent<SpriteRenderer>().color = neutralColor;
+            ColorManager.instance.ActionColor(obj);
         }
 
-        if (squareHovered != null) squareHovered.GetComponent<SpriteRenderer>().color = hoveredColor;
-        if (squareSelected != null) squareSelected.GetComponent<SpriteRenderer>().color = selectedColor;
-        if (commandantSelected != null) squareSelected.GetComponent<SpriteRenderer>().color = selectedCommandantColor;
+        ColorManager.instance.HoveredColor(squareHovered);
 
-        Debug.Log(squareActionList.Count);
+        if (squareSelected != null) ColorManager.instance.SelectedColor(squareSelected);
+        if (commandantSelected != null) ColorManager.instance.SelectedCommandantColor(squareSelected);
+
         if (squareActionList.Count != 0)
         {
             foreach (Square obj in squareActionList)
             {
-                obj.GetComponent<SpriteRenderer>().color = actionColor;
+                try { ColorManager.instance.ActionColor(obj); } catch {}
             }
         }
     }
